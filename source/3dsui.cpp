@@ -69,9 +69,9 @@ uint8 *fontWidth;
 // this is called on init and if game screen has swapped
 void ui3dsUpdateScreenSettings(gfxScreen_t gameScreen) {
 	screenSettings.GameScreen = gameScreen;
-	screenSettings.SecondScreen = (screenSettings.GameScreen == GFX_TOP) ? GFX_BOTTOM : GFX_TOP;
+	screenSettings.SecondScreen = GFX_BOTTOM; // for making menu always on bottom screen for consoles with top screen broken
 	screenSettings.GameScreenWidth  = (screenSettings.GameScreen == GFX_TOP) ? SCREEN_TOP_WIDTH : SCREEN_BOTTOM_WIDTH;
-    screenSettings.SecondScreenWidth  = (screenSettings.SecondScreen == GFX_TOP) ? SCREEN_TOP_WIDTH : SCREEN_BOTTOM_WIDTH;
+    screenSettings.SecondScreenWidth  = SCREEN_BOTTOM_WIDTH;
     
     // for second screen rom info
 	bounds[B_TOP] = PADDING;

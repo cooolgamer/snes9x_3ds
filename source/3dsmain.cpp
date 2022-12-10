@@ -69,7 +69,7 @@ bool screenImageHidden;
 char* hotkeysData[HOTKEYS_COUNT][3];
 
 void setSecondScreenContent(bool newRomLoaded, bool settingsUpdated = false) {
-    if (settings3DS.SecondScreenContent == CONTENT_IMAGE) {
+    if (settings3DS.SecondScreenContent == CONTENT_IMAGE || screenSettings.GameScreen == GFX_BOTTOM) { // if it uses game image, it allow showing the game correctly on bottom screen if it's "swaped". trash, but works
         ui3dsRenderScreenImage(screenSettings.SecondScreen, S9xGetGameFolder("cover.png"), newRomLoaded || screenImageHidden);
         screenImageHidden = false;
     } 
@@ -275,14 +275,11 @@ std::vector<SMenuItem> makeEmulatorMenu(std::vector<SMenuTab>& menuTab, int& cur
     items.emplace_back([&menuTab, &currentMenuTab, &closeMenu](int val) {
         SMenuTab dialogTab;
         bool isDialog = false;
-        int result = menu3dsShowDialog(dialogTab, isDialog, currentMenuTab, menuTab, "Swap Game Screen", "Are you sure?", DIALOGCOLOR_RED, makeOptionsForNoYes());
         menu3dsHideDialog(dialogTab, isDialog, currentMenuTab, menuTab);
-        if (result == 1) {
-            ui3dsUpdateScreenSettings(screenSettings.GameScreen == GFX_TOP ? GFX_BOTTOM : GFX_TOP);
-            settings3DS.GameScreen = screenSettings.GameScreen;
-            screenSwapped = true;
-            closeMenu = true;
-        }
+        ui3dsUpdateScreenSettings(screenSettings.GameScreen == GFX_TOP ? GFX_BOTTOM : GFX_TOP);
+        settings3DS.GameScreen = screenSettings.GameScreen;
+        screenSwapped = true;
+        closeMenu = true;
     }, MenuItemType::Action, "  Swap Game Screen"s, ""s);
 
     items.emplace_back([&menuTab, &currentMenuTab](int val) {
