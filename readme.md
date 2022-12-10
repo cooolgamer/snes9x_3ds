@@ -11,7 +11,6 @@ Credits go to ramzinouris fork (https://github.com/ramzinouri/snes9x_3ds) and As
 
 
 ## TODO:
-- provide release files (cia, 3dsx)
 - zipfile support
 - most recent and favorites in the rom menu
 - game previews in the rom menu
@@ -149,6 +148,8 @@ Try to avoid pressing the Home button or putting the 3DS to sleep. Quit the emul
 
 ## Change History
 
+This fork of v1.45
+- Made the menu always shown on bottom screen for consoles with broken top screen. This is absolute trash and needs to be edited, if you know how then feel free to fork and do it!
 
 v1.42
 - Fixed screen tearing
